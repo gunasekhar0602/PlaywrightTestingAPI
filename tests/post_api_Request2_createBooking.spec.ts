@@ -4,7 +4,9 @@ Test - create booking     Request type - post      Request body - JSON file
 // Here are getting the request body details from the json file.
 
 import{test,expect}from'@playwright/test'
+// npm install fs
 import fs from 'fs';  // for getting file
+
 
 test('create request using JSON file',async({request})=>
 {
