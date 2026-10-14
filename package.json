@@ -10,13 +10,14 @@
   "type": "commonjs",
   "devDependencies": {
     "@faker-js/faker": "^10.4.0",
-    "@playwright/test": "^1.60.0",
+    "@playwright/test": "^1.64.0",
     "@types/node": "^25.7.0",
     "ajv": "^8.20.0",
     "luxon": "^3.7.2",
     "playwright": "^1.60.0"
   },
   "dependencies": {
+    "dotenv": "^18.0.7",
     "fs": "^0.0.1-security"
   }
 }

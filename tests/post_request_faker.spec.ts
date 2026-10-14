@@ -1,8 +1,7 @@
-/* 
+ /* 
 Test - create booking
 Request type - post
 Request body - randon/dynamic (faker)
-
 pre-requistes:
 
 Install faker-js library for genrating dynamic data
