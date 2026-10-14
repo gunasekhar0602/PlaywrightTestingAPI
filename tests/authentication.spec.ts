@@ -71,6 +71,8 @@ test('Basic Authentication', async({request})=>
 // 3. API Key Authetication
 test ("API key authentication (open weather API)",async ({request})=>
 {
+    // proccess is module
+    // by using the proccess module we can get the env file and the variables in it
     const apikey=process.env.OPENWEATHER_API_KEY
     const city="Delhi"
 
@@ -98,12 +100,16 @@ test ("API key authentication (open weather API)",async ({request})=>
 // 4. Bearer token authentication
 test('Bearer token authentication - Get user Repositories', async ({request})=>
 {
+    // proccess is module
+    // by using the proccess module we can get the env file and the variables in it
     const github_token=process.env.GITHUB_TOKEN
 
     const response=await request.get('https://api.github.com/user/repos',
         {
             headers:
             {
+                // we need to pass the bearer token in the headers
+                // Bearer is type of authentication.
                 Authorization:`Bearer ${github_token}`
             }
         }
@@ -112,6 +118,7 @@ test('Bearer token authentication - Get user Repositories', async ({request})=>
     const repositories=await response.json();
     console.log(repositories);
 
+    // printing the repositoriy names
     for(let repo of repositories)
     {
         console.log(repo.name);
