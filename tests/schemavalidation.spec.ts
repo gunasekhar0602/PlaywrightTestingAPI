@@ -15,6 +15,10 @@ test("Schema validation",async({request})=>
 
 
     // step 2 - Define the schema
+    /* 
+    -> Take the responsebody and get the schema
+    -> store it in schema varaible
+    */
     const schema=
     {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
@@ -43,6 +47,14 @@ test("Schema validation",async({request})=>
 }
 
     // step 3 - Check response against schema
+    /* 
+    -> Ajv is a class with that we can create the object
+    -> ajv is object. compile is a built in method OR function
+    -> inside the compile funtion we need to pass schema
+    -> compile return something called validator function, we need 
+                                to store it in validate varaible
+    
+    */
     const ajv=new Ajv2020();
     const validate=ajv.compile(schema);  
 
