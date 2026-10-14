@@ -19,7 +19,7 @@ test('create request using JSON file',async({request})=>
     // UTF-8 - Unicode Transformation Format - it is required when dealing with 
                               // JSON and CSV files to ensure standard text encoding
 
-    // JSON.parse() - which converts the raw UTF-8 string into JavaScript array/object format(logindata)
+    // JSON.parse() - which converts the raw UTF-8 string into JavaScript array/object format(request body)
     // parse method will take - fs.readFileSync(jsonpath,'utf-8') as parameter
     // create a varible requestbody
     const requestbody:any=JSON.parse(fs.readFileSync(jsonFile,'utf-8'));
