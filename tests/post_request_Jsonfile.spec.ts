@@ -1,22 +1,27 @@
-/* 
-Test - create booking     Request type - post      Request body - JSON file
-*/
+// Creating a request - POST  
 // Here are getting the request body details from the json file.
 
 import{test,expect}from'@playwright/test'
+
 // npm install fs
 import fs from 'fs';  // for getting file
-
 
 test('create request using JSON file',async({request})=>
 {
     // read data from json(request body)
-    // create a varaiable for jsonfile and provide file path as value
     const jsonFile="testdata/requestbody.json"
 
-    // JSON is predefined class      // parse is method
-    // This will return data from the requestbody json file
-    // We need to get the request body
+    // JSON is predeifned class, inside that we are calling parse method.
+    // it will read the data in array formate.
+    // Reading and parsing the JSON Data --------------------------------------------------------------------------------------
+    // fs.readFilesync(jsonpath,'utf-8') - Reads JSON file synchronously
+    // jsonpath - storing the relative path of JSON file which contains test data
+    // UTF-8 - Unicode Transformation Format - it is required when dealing with 
+                              // JSON and CSV files to ensure standard text encoding
+
+    // JSON.parse() - which converts the raw UTF-8 string into JavaScript array/object format(logindata)
+    // parse method will take - fs.readFileSync(jsonpath,'utf-8') as parameter
+    // create a varible requestbody
     const requestbody:any=JSON.parse(fs.readFileSync(jsonFile,'utf-8'));
 
     // send post request and capture in response
