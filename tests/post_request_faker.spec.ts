@@ -1,11 +1,6 @@
- /* 
-Test - create booking
-Request type - post
-Request body - randon/dynamic (faker)
-pre-requistes:
-
-Install faker-js library for genrating dynamic data
-npm install @faker-js/faker
+// Creating a request - POST  
+// Here are getting the request body details from the faker library
+/* 
 
 Install Luxon is a library for working with dates and times in JavaScript
 npm install luxon
@@ -18,7 +13,7 @@ import{test,expect}from'@playwright/test'
 import{faker} from"@faker-js/faker"
 import{DateTime}from "luxon";
 
-test('create request using static body',async({request})=>
+test('create request using faker data',async({request})=>
 {
     // Data generation using faker library
     const firstname=faker.person.firstName()

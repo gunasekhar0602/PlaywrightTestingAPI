@@ -1,3 +1,5 @@
+// Query Parameters
+
 import{test,expect,Locator}from'@playwright/test'
 
 test('getrequest by query parameter',async({request})=>
@@ -7,9 +9,11 @@ test('getrequest by query parameter',async({request})=>
     const lastname="Brown";
 
     // sending get request and capturing the response by using query parameter
-    // Instead of providing values directly we use a key called params
+    // Instead of providing two parameter values directly we use a key called params
     const response=await request.get("https://restful-booker.herokuapp.com/booking",
-                                                {params:{firstname,lastname}})
+                                                {params:
+                                                    {firstname,lastname}
+                                                });
 
     // parse the response and print
     const responsebody=await response.json();
@@ -17,9 +21,10 @@ test('getrequest by query parameter',async({request})=>
 
     // add assertions
     expect(response.ok()).toBeTruthy;
+
+    // verify response status
     expect(response.status()).toBe(200);
     
-
     // response should not be empty
     expect(responsebody.length).toBeGreaterThan(0);
 
