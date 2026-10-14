@@ -12,8 +12,7 @@ test("Schema validation",async({request})=>
     // print response body
     console.log(responsebody);
 
-
-
+    
     // step 2 - Define the schema
     const schema=
     {
