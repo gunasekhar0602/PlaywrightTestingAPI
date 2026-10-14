@@ -12,14 +12,14 @@ test('No Authentication', async({request})=>
     expect(response.status()).toBe(200);
 
     // step 3 - Read the response body
-    const responsebody=await response.json()
-    console.log(responsebody)
+    const responsebody=await response.json();
+    console.log(responsebody);
 
     // step 4 - Validate the response body
     expect(responsebody.userId).toBe(1);
     expect(responsebody.id).toBe(1);
     expect(responsebody).toHaveProperty('title');
-    expect(responsebody).toHaveProperty('body')
+    expect(responsebody).toHaveProperty('body');
 })
 
 
@@ -40,13 +40,15 @@ test('Basic Authentication', async({request})=>
 
     // buffer is package which will encode the username and password
     // base64 will change the username and passowrd to encoded string formate.
-    const base64Credentals=Buffer.from(`${username}:${password}`).toString('base64')
-    console.log("encode string", base64Credentals)
+    const base64Credentals=Buffer.from(`${username}:${password}`).toString('base64');
+    console.log("encode string", base64Credentals);
 
+    // send the GET request and capture the response
     const response=await request.get('https://postman-echo.com/basic-auth',
     {
         headers:
             {
+                // we need to pass the encode string value in headers
                 // Manually setting Basic Auth header (alternative method)
                 // Authorization is a random keyword
                 // Basic is type of authentication
@@ -55,8 +57,8 @@ test('Basic Authentication', async({request})=>
         });
 
     expect(response.status()).toBe(200);
-    const responsebody=await response.json()
-    console.log(responsebody)
+    const responsebody=await response.json();
+    console.log(responsebody);
     expect(responsebody.authenticated).toBe(true);
 
 })
@@ -112,7 +114,7 @@ test('Bearer token authentication - Get user Repositories', async ({request})=>
 
     for(let repo of repositories)
     {
-        console.log(repo.name)
+        console.log(repo.name);
     }
 })
 
