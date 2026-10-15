@@ -15,7 +15,7 @@ function readJson(filepath:string)
     return JSON.parse(fs.readFileSync(filepath,'utf-8'))
 }
 
-test('update Booking(PUT)',async({request})=>
+test('Create booking, update booking and delete booking',async({request})=>
 {
     // 1) Create a booking(post)
     // reading data from the file
@@ -24,6 +24,7 @@ test('update Booking(PUT)',async({request})=>
     // create a variable called url and mention the URL value in it
     const url="https://restful-booker.herokuapp.com/booking/"
     const createresponse=await request.post(`${url}`, {data:createrequestbody});
+
     expect(createresponse.ok()).toBeTruthy();
 
     
@@ -35,8 +36,7 @@ test('update Booking(PUT)',async({request})=>
     console.log(bookingid)
 
 
-    // 2) Update booking (PUT)  // required token
-    // token creation
+    // 2) Token creation for updating the data
 
     const tokenrequestbody=readJson("testdata/token_requestbody.json");
 
@@ -54,21 +54,58 @@ test('update Booking(PUT)',async({request})=>
     // 3) Sending update (patch)
 
     // For update request along with the request we need to add token through headers
-    const updaterequestbody =readJson("testdata/putrequestbody.json");
+    const partial_updaterequestbody =readJson("testdata/patch_requestbody.json");
 
-    const updateresponse=await request.patch(`${url}${bookingid}`,
+    const partial_updateresponse=await request.patch(`${url}${bookingid}`,
                     {
-                            headers:{"cookie":`token=${token}`},
+                            headers:{
+                                "cookie":`token=${token}`
+                            },
                             // we need to pass the data regarding the update
-                            data:updaterequestbody
+                            data:partial_updaterequestbody
         
                     })
 
-    expect(updateresponse.ok()).toBeTruthy();
-    expect(updateresponse.status()).toBe(200);
+    expect(partial_updateresponse.ok()).toBeTruthy();
+    expect(partial_updateresponse.status()).toBe(200);
 
-    const updateresponsebody=await updateresponse.json();
-    console.log(updateresponsebody);
+    const partial_updateresponsebody=await partial_updateresponse.json();
+    console.log(partial_updateresponsebody);
     console.log("Booking details updated successfully.....");
+
+
+    // step 4 - Full update the booking
+
+    // Read the file and store it in a varaible - full_updaterequestbody
+    const full_updaterequestbody=readJson("testdata/put_requestbody.json")
+
+    // capture the update response by passing 
+    const full_updateresponse=await request.put(`${url}${bookingid}`,
+        {
+            headers:{
+                "Cookie":`${token}`
+            },
+            data:full_updaterequestbody
+        })
+
+    expect(full_updateresponse.status()).toBe(200)
+    const full_updateresponsebody=await full_updateresponse.json()
+    console.log(full_updateresponsebody)
+    console.log("Booking details updated successfully")
+
+
+
+
+    // 5. Delete Booking
+    const deleteresponse=await request.delete(`${url}${bookingid}`,
+        {
+            headers:
+            {
+                "cookie":`token:${token}`
+            }
+
+        });
+    expect(deleteresponse.status()).toBe(200);
+    console.log('Booking details deleted successfully') 
 
 })
